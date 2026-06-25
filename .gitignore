@@ -1,0 +1,50 @@
+# ---- Conan 2 + CMake (generated) ----
+# cmake_layout puts conan_toolchain.cmake, the *-config.cmake files,
+# CMake presets, and all compiled output under build/. All regenerable
+# from conanfile.txt + the profile via `conan install`.
+/build/
+/cmake-build-*/        # CLion's out-of-source build dirs
+
+# Conan writes this to the repo ROOT (not build/); it points CMake at
+# the presets inside build/, so it needs its own line.
+CMakeUserPresets.json
+
+# Conan local cache / metadata, if it ever lands in-tree
+.conan/
+
+# ---- CMake (safety net if ever configured outside build/) ----
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+
+# ---- Visual Studio / MSVC ----
+/.vs/
+*.user           # *.vcxproj.user and similar per-user settings
+*.suo
+*.aps
+*.ncb
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+
+# ---- Build artifacts (in case any escape build/) ----
+*.obj
+*.exe
+*.dll
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.idb
+
+# ---- Editors ----
+/.idea/
+*.swp
+*~
+
+# ---- OS cruft ----
+Thumbs.db
+Desktop.ini
+.DS_Store

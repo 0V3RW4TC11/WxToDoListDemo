@@ -1,0 +1,25 @@
+[requires]
+wxwidgets/3.3.2
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[options]
+# Static libs are already the recipe default, but stating it explicitly
+# forces the whole dependency tree (png/jpeg/zlib/expat/...) static too,
+# which is what you want for a single self-contained .exe.
+wxwidgets/*:shared=False
+
+# Trim heavy components a network-adapter tray utility doesn't need.
+# This cuts build time a lot (stc/scintilla is the biggest culprit and
+# was the source of the 3.3.0 build breakage) and shrinks the binary.
+# Re-enable any you actually end up using.
+wxwidgets/*:stc=False
+wxwidgets/*:webview=False
+wxwidgets/*:mediactrl=False
+wxwidgets/*:opengl=False
+wxwidgets/*:aui=False
+wxwidgets/*:ribbon=False
+wxwidgets/*:richtext=False
+wxwidgets/*:propgrid=False
