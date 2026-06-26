@@ -2,7 +2,7 @@
 # cmake_layout puts conan_toolchain.cmake, the *-config.cmake files,
 # CMake presets, and all compiled output under build/. All regenerable
 # from conanfile.txt + the profile via `conan install`.
-/build/
+/out/
 /cmake-build-*/        # CLion's out-of-source build dirs
 
 # Conan writes this to the repo ROOT (not build/); it points CMake at
