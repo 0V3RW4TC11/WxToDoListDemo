@@ -12,9 +12,15 @@ find_package(wxWidgets REQUIRED)
 # supplies WinMain, so this links cleanly as a GUI app.
 # app.rc pulls in the wx manifest for proper theming + high-DPI.
 add_executable(${PROJECT_NAME} WIN32
-    src/main.cpp
-    src/app.rc
-)
+    "src/app.rc"
+    "src/app.h"
+    "src/app.cpp"
+    "src/mainFrame.h"
+    "src/mainFrame.cpp"
+    "src/task.h"
+    "src/task.cpp"
+    "src/utils.h"
+ )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE wxWidgets::wxWidgets)
 
