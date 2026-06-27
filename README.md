@@ -21,13 +21,13 @@ system — that's yours to choose in CMake (CMake-GUI or the command line).
 From the repo root, in a shell where Conan is on PATH:
 
 ```powershell
-conan install . -of out -pr .\profiles\conan\compiler\msvc195-cpp20-static -s build_type=Release --build=missing
+conan install . -of out -pr .\profiles\conan\compiler\x86_64-msvc195-cpp20-static -s build_type=Release --build=missing
 ```
 
 Add a Debug variant if you want to develop in Debug:
 
 ```powershell
-conan install . -of out -pr .\profiles\conan\compiler\msvc195-cpp20-static -s build_type=Debug --build=missing
+conan install . -of out -pr .\profiles\conan\compiler\x86_64-msvc195-cpp20-static -s build_type=Debug --build=missing
 ```
 
 The first run compiles wxWidgets from source (static + `/MT` has no
@@ -87,7 +87,7 @@ You should see only core Windows DLLs (kernel32, user32, gdi32, etc.) and
 
 ## Notes
 
-- **Toolset version.** `profiles\conan\compiler\msvc195-cpp20-static` pins `compiler.version=195`
+- **Toolset version.** `profiles\conan\compiler\x86_64-msvc195-cpp20-static` pins `compiler.version=195`
   (VS 2026 / `cl` 19.5x, toolset v145). On an older Visual Studio, edit
   that line to match your `cl` — `194` for VS 2022 17.10+, `193` for
   earlier 2022 — or delete it and run `conan profile detect` from an x64
