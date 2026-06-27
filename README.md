@@ -21,21 +21,21 @@ system — that's yours to choose in CMake (CMake-GUI or the command line).
 From the repo root, in a shell where Conan is on PATH:
 
 ```powershell
-conan install . -of out -pr ./profiles/conan/compiler/msvc195-cpp20-static -s build_type=Release --build=missing
+conan install . -of out -pr .\profiles\conan\compiler\msvc195-cpp20-static -s build_type=Release --build=missing
 ```
 
 Add a Debug variant if you want to develop in Debug:
 
 ```powershell
-conan install . -of out -pr ./profiles/conan/compiler/msvc195-cpp20-static -s build_type=Debug --build=missing
+conan install . -of out -pr .\profiles\conan\compiler\msvc195-cpp20-static -s build_type=Debug --build=missing
 ```
 
 The first run compiles wxWidgets from source (static + `/MT` has no
 prebuilt binary), so expect a wait. `-of out` just tells Conan to drop
-its generated files into `out/`; the one you care about is:
+its generated files into `out\`; the one you care about is:
 
 ```
-out/conan_toolchain.cmake
+out\conan_toolchain.cmake
 ```
 
 That's the file that points CMake at the wxWidgets Conan just built.
@@ -53,7 +53,7 @@ That's the file that points CMake at the wxWidgets Conan just built.
 5. In the dialog:
    - Pick your generator (e.g. *Visual Studio 17 2022*, or *Ninja*).
    - Select **Specify toolchain file for cross-compiling**.
-   - Click **Next** and point it at `out/conan_toolchain.cmake`.
+   - Click **Next** and point it at `out\conan_toolchain.cmake`.
    - Finish.
 6. Click **Configure** again if needed, then **Generate**.
 
@@ -72,7 +72,7 @@ If you'd rather not use the GUI, the same thing in one line (pick your
 own `-G`):
 
 ```powershell
-cmake -S . -B out -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=out/conan_toolchain.cmake
+cmake -S . -B out -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=out\conan_toolchain.cmake
 cmake --build out --config Release
 ```
 
@@ -87,7 +87,7 @@ You should see only core Windows DLLs (kernel32, user32, gdi32, etc.) and
 
 ## Notes
 
-- **Toolset version.** `profiles/conan/compiler/msvc195-cpp20-static` pins `compiler.version=195`
+- **Toolset version.** `profiles\conan\compiler\msvc195-cpp20-static` pins `compiler.version=195`
   (VS 2026 / `cl` 19.5x, toolset v145). On an older Visual Studio, edit
   that line to match your `cl` — `194` for VS 2022 17.10+, `193` for
   earlier 2022 — or delete it and run `conan profile detect` from an x64
