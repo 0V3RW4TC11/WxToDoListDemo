@@ -25,5 +25,6 @@ private:
 	void OnClearButtonClicked(wxCommandEvent& event);
 	void OnWindowClosed(wxCloseEvent& event);
 	void AddSavedTasks();
+	void SetupSizers();
 };
 
