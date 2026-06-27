@@ -80,13 +80,3 @@ folder. Open them in your IDE.
 `conanfile.txt` already disables the heaviest unused components (stc,
 webview, mediactrl, opengl, aui, ribbon, richtext, propgrid). Disable
 more (e.g. `html`, `xrc`) the same way if you don't use them.
-
-## If the dependency build fails
-
-The 3.3.0 recipe had a known source-build break. If you hit trouble on a
-`3.3.x` version, pin the mature stable line instead — change the require in
-`conanfile.txt` to:
-
-```ini
-wxwidgets/3.2.10
-```
