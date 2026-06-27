@@ -11,6 +11,7 @@ system — that's yours to choose in CMake (CMake-GUI or the command line).
 
 ## Prerequisites
 
+- Windows 10/11 (x64) — the build system targets Windows exclusively (MSVC static runtime, Win32 API)
 - Visual Studio 2022/2026 with the "Desktop development with C++" workload
 - CMake 3.21+
 - Conan 2.x  (`pip install -U conan`)
@@ -19,16 +20,14 @@ system — that's yours to choose in CMake (CMake-GUI or the command line).
 
 From the repo root, in a shell where Conan is on PATH:
 
-```bat
-conan install . -of out -pr ./profiles/conan/compiler/msvc195-cpp20-static
- -s build_type=Release --build=missing
+```powershell
+conan install . -of out -pr ./profiles/conan/compiler/msvc195-cpp20-static -s build_type=Release --build=missing
 ```
 
 Add a Debug variant if you want to develop in Debug:
 
-```bat
-conan install . -of out -pr ./profiles/conan/compiler/msvc195-cpp20-static
- -s build_type=Debug --build=missing
+```powershell
+conan install . -of out -pr ./profiles/conan/compiler/msvc195-cpp20-static -s build_type=Debug --build=missing
 ```
 
 The first run compiles wxWidgets from source (static + `/MT` has no
@@ -72,14 +71,14 @@ folder. Open them in your IDE.
 If you'd rather not use the GUI, the same thing in one line (pick your
 own `-G`):
 
-```bat
+```powershell
 cmake -S . -B out -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=out/conan_toolchain.cmake
 cmake --build out --config Release
 ```
 
 ## Verifying it's truly self-contained
 
-```bat
+```powershell
 dumpbin /dependents build\Release\WxToDoListDemo.exe
 ```
 
