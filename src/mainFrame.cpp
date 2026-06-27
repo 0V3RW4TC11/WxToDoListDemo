@@ -7,6 +7,7 @@
 
 MainFrame::MainFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, title) {
 	CreateControls();
+	SetupSizers();
 	BindEventHandlers();
 	AddSavedTasks();
 }
@@ -17,14 +18,13 @@ void MainFrame::CreateControls() {
 
 	panel = new wxPanel(this);
 	panel->SetFont(mainFont);
-	headlineText = new wxStaticText(panel, wxID_ANY, "To-Do List", wxPoint(0, 22), wxSize(800, -1),
-		wxALIGN_CENTER_HORIZONTAL);
+	headlineText = new wxStaticText(panel, wxID_ANY, "To-Do List");
 	headlineText->SetFont(headlineFont);
 	
-	inputField = new wxTextCtrl(panel, wxID_ANY, "", wxPoint(100, 80), wxSize(495, 35), wxTE_PROCESS_ENTER);
-	addButton = new wxButton(panel, wxID_ANY, "Add", wxPoint(600, 80), wxSize(100, 35));
-	checkListBox = new wxCheckListBox(panel, wxID_ANY, wxPoint(100, 120), wxSize(600, 400));
-	clearButton = new wxButton(panel, wxID_ANY, "Clear", wxPoint(100, 525), wxSize(100, 35));
+	inputField = new wxTextCtrl(panel, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+	addButton = new wxButton(panel, wxID_ANY, "Add");
+	checkListBox = new wxCheckListBox(panel, wxID_ANY);
+	clearButton = new wxButton(panel, wxID_ANY, "Clear");
 }
 
 void MainFrame::BindEventHandlers() {
@@ -125,4 +125,26 @@ void MainFrame::AddSavedTasks() {
 		checkListBox->Insert(task.description, index);
 		checkListBox->Check(index, task.done);
 	}
+}
+
+void MainFrame::SetupSizers() {
+	auto mainVBox = new wxBoxSizer(wxVERTICAL);
+	mainVBox->Add(headlineText, wxSizerFlags().CenterHorizontal());
+
+	auto inputHBox = new wxBoxSizer(wxHORIZONTAL);
+	inputHBox->Add(inputField, wxSizerFlags().Proportion(1));
+	inputHBox->AddSpacer(5);
+	inputHBox->Add(addButton);
+
+	mainVBox->Add(inputHBox, wxSizerFlags().Expand());
+	mainVBox->AddSpacer(5);
+	mainVBox->Add(checkListBox, wxSizerFlags().Expand().Proportion(1));
+	mainVBox->AddSpacer(5);
+	mainVBox->Add(clearButton, wxSizerFlags().CenterHorizontal());
+
+	auto grid = new wxGridSizer(1);
+	grid->Add(mainVBox, wxSizerFlags().Border(wxALL, 25).Expand());
+
+	panel->SetSizer(grid);
+	grid->SetSizeHints(this);
 }
