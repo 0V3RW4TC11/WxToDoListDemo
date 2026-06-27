@@ -14,7 +14,7 @@ system — that's yours to choose in CMake (CMake-GUI or the command line).
 - Windows 10/11 (x64) — the build system targets Windows exclusively (MSVC static runtime, Win32 API)
 - Visual Studio 2022/2026 with the "Desktop development with C++" workload
 - CMake 3.21+
-- Conan 2.x  (`pip install -U conan`)
+- Conan 2.x
 
 ## 1. Build wxWidgets with Conan (once)
 
