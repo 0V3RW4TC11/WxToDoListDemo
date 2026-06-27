@@ -24,6 +24,8 @@ add_executable(${PROJECT_NAME} WIN32
 
 target_link_libraries(${PROJECT_NAME} PRIVATE wxWidgets::wxWidgets)
 
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+
 # On MSVC the linker embeds its own DPI-unaware manifest by default, which
 # overrides the one wx.rc provides -> app runs DPI-unaware (blurry).
 # Disable the linker's manifest so wx's manifest from app.rc is the only one.
