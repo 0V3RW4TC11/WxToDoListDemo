@@ -1,13 +1,8 @@
 # WxToDoListDemo
 
-Minimal wxWidgets + Conan + CMake skeleton for a Windows app, configured
+Minimal wxWidgets + Conan + CMake for a Windows app, configured
 for a fully self-contained `.exe` (static wx libs + static MSVC runtime,
 no VC++ Redistributable required).
-
-**Division of labour:** Conan's only job here is to build wxWidgets and
-write a `conan_toolchain.cmake` describing where it landed (include dirs,
-libs, defines, system libs). It does **not** pick your generator or build
-system — that's yours to choose in CMake (CMake-GUI or the command line).
 
 ## Prerequisites
 
@@ -66,25 +61,6 @@ folder. Open them in your IDE.
 > (wxWidgets) fails and the cache holds the wrong compiler/runtime guess —
 > delete the cache (File -> Delete Cache) and start at step 4 again.
 
-### Command-line equivalent
-
-If you'd rather not use the GUI, the same thing in one line (pick your
-own `-G`):
-
-```powershell
-cmake -S . -B out -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=out\conan_toolchain.cmake
-cmake --build out --config Release
-```
-
-## Verifying it's truly self-contained
-
-```powershell
-dumpbin /dependents build\Release\WxToDoListDemo.exe
-```
-
-You should see only core Windows DLLs (kernel32, user32, gdi32, etc.) and
-**no** `MSVCP*.dll` / `VCRUNTIME*.dll`, confirming the static CRT.
-
 ## Notes
 
 - **Toolset version.** `profiles\conan\compiler\x86_64-msvc195-cpp20-static` pins `compiler.version=195`
@@ -93,10 +69,6 @@ You should see only core Windows DLLs (kernel32, user32, gdi32, etc.) and
   earlier 2022 — or delete it and run `conan profile detect` from an x64
   developer shell. Conan rebuilds wx per toolset, so it must match the
   compiler you generate against in CMake-GUI.
-
-- **Generator name.** If CMake-GUI's generator dropdown doesn't list your
-  Visual Studio, your CMake predates support for it — update CMake, or
-  choose Ninja.
 
 - **Architecture.** The profile pins `arch=x86_64`, so the Conan build is
   x64 regardless of which shell you launch from. Make sure the generator
